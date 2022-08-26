@@ -1,0 +1,19 @@
+.section {
+    height: 600px;
+}
+
+.container {
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+}
+
+.row.section {
+    margin: 0%;
+    padding: 0%;
+}
+
+.col {
+    margin: 0%;
+    padding: 0%;    
+}
