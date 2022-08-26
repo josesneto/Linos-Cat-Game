@@ -7,8 +7,8 @@ var render = Render.create({
 element: document.getElementById('canvas'),
 engine: engine,
 options: {
-    width: window.innerWidth - 40,
-    height: 200,
+    width: 1200,
+    height: 700,
     wireframes: false
 }
 });

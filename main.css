@@ -1,19 +1,16 @@
-.section {
-    height: 600px;
+body {
+    background-color: black;
 }
+
 
 .container {
     width: 100%;
-    margin: 0%;
-    padding: 0%;
+    margin: auto;
 }
 
-.row.section {
-    margin: 0%;
-    padding: 0%;
-}
-
-.col {
-    margin: 0%;
-    padding: 0%;    
+#canvas {
+    border: solid red 1px;
+    width: 1400;
+    height: 900;
+    margin: auto;
 }
