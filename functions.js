@@ -5,40 +5,88 @@ function keyDownBinding() {
         // Render.lookAt(render, bounds);
         switch (key_code) {
             case 'ArrowLeft':
+                walkToDirection('left');
                 direction = -1;
-                Body.setPosition(playerBox, { x: playerBox.position.x - 10, y: playerBox.position.y });
+                Body.setPosition(playerBox, { x: playerBox.position.x - cat_vel, y: playerBox.position.y });
                 break;
             case 'ArrowRight':
+                walkToDirection('right');
                 direction = 1;
-                Body.setPosition(playerBox, { x: playerBox.position.x + 10, y: playerBox.position.y });
+                Body.setPosition(playerBox, { x: playerBox.position.x + cat_vel, y: playerBox.position.y });
                 break;
             case 'ArrowUp':
-                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - 10 });
+                walkToDirection('up');
+                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - cat_vel });
                 break;
             case 'ArrowDown':
-                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + 10});
+                walkToDirection('down');
+                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel});
                 break;
             case 'KeyS':
-                state = 'sitting';
+                sit();
                 break;
         }
     }
 }
 
+function walkToDirection(arrowDirection) {
+    boomerang_frame = false;
+    switch (arrowDirection) {
+        case 'left':
+            direction = -1;
+            Body.setPosition(playerBox, { x: playerBox.position.x - 10, y: playerBox.position.y });
+            break;
+        case 'right':
+            direction = 1;
+            Body.setPosition(playerBox, { x: playerBox.position.x + 10, y: playerBox.position.y });
+            break;
+        case 'up':
+            Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - 10 });
+            break;
+        case 'down':
+            Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + 10});
+            break;
+    }
+}
+
+function stopAndStand() {
+    boomerang_frame = true;
+    Matter.Body.setVelocity(playerBox, { x: 0, y: 0 });
+    animation_index = 0;
+    key_pressed = false;
+    state = 'standing';
+}
+
+function sit() {
+    boomerang_frame = true;
+    Matter.Body.setVelocity(playerBox, { x: 0, y: 0 });
+    state = 'sitting';
+}
+
 function createBound(x1, y1, x2, y2) {
-    var bound = Bounds.create([{ x: x1, y: y1 }, { x: x2, y: y2 }]);
-    var visible_rect = Bodies.rectangle(x1,y1, x2-x1, y2-y1,  {
-        isStatic: true, collisionFilter: {
-            'group': -1,
-            'category': 2,
-            'mask': 0,
-        }
-    });
-    return { bound: bound, visible_rect: visible_rect };
+    var bounds = Bounds.create([{ x: x1, y: y1 }, { x: x2, y: y2 }]);
+    // var visible_rect = Bodies.rectangle(x1,y1, x2-x1, y2-y1,  {
+    //     isStatic: true, collisionFilter: {
+    //         'group': -1,
+    //         'category': 2,
+    //         'mask': 0,
+    //     }
+    // });
+    // return { bound: bound, visible_rect: visible_rect };
+    return bounds;
 }
 
 function checkBounds(bounds, vector) {
     return Bounds.contains(bounds, vector);
+}
+
+function boundsCheckListener(bounds, bounds_name) {
+    bound_stepped[bounds_name] = bound_stepped[bounds_name] ? bound_stepped[bounds_name] : false;
+    if (!bound_stepped[bounds_name] && checkBounds(bounds, {x: playerBox.position.x, y: playerBox.position.y})) {
+        alert(bounds_name);
+        stopAndStand();
+    }
+    bound_stepped[bounds_name] = checkBounds(bounds, {x: playerBox.position.x, y: playerBox.position.y});
 }
 
 function updateFrames() {
@@ -54,6 +102,7 @@ function updateFrames() {
 function preloadImage(url) {
     var img = new Image();
     img.src = url;
+    return img;
 }
 
 function loadImages() {
@@ -64,7 +113,7 @@ function loadImages() {
             for (var k = -4; k <= 4; k++) {
                 if (k != 0) {
                     var frame_to_load = ['images/cats', cats[i], states[j], k].join('/') + '.png';
-                    preloadImage(frame_to_load);
+                    image_sources[frame_to_load] = preloadImage(frame_to_load);
                 }
             }
         }

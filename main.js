@@ -2,7 +2,6 @@
 World.add(engine.world, walls);
 World.add(engine.world, things);
 World.add(engine.world, playerBox);
-World.add(engine.world, rect1);
 
 // World.add(engine.world, foreground);
 
@@ -12,13 +11,17 @@ Render.run(render);
 // Bounds.shift(bounds, {x: playerBox.position.x, y: playerBox.position.y});
 // Render.lookAt(render, bounds);
 
+ var bound_stepped = {};
+
 var seq_counter = 1,
     boomerang_counter = 1,
     boomerang_frame = true,
     frame_acc = 1,
     direction = 1,
     state = 'standing',
-    key_pressed = false;
+    key_pressed = false,
+    cat_vel = 1
+        image_sources = {};
 
 loadImages();
 
@@ -26,21 +29,15 @@ window.onload = function () {
 
     setInterval(keyDownBinding, 25);
     setInterval(updateFrames, 150);
-    // setInterval(checkBounds, 1000, bound1, {x: playerBox.position.x, y: playerBox.position.y});
+    setInterval(boundsCheckListener, 100, bounds1, 'bound1');
+    setInterval(boundsCheckListener, 100, bounds2, 'bound2');
 
     document.addEventListener('keyup', (event) => {
-        console.log(checkBounds(bound1, {x: playerBox.position.x, y: playerBox.position.y}), playerBox.position.x, playerBox.position.y);
         try {
             var key_name = event.key;
             var key_code = event.code;
-            Matter.Body.setVelocity(playerBox, { x: 0, y: 0 });
-            if (key_code.startsWith('Arrow')) {
-                animation_index = 0;
-            }
-            key_pressed = false;
-            boomerang_frame = true;
-            if (state == 'walking') {
-                state = 'standing';
+            if (state != 'sitting') {
+                stopAndStand();
             }
         } catch (e) { }
     }, false);
@@ -54,7 +51,6 @@ window.onload = function () {
             if (key_code.startsWith('Arrow')) {
                 state = 'walking';
             }
-            boomerang_frame = false;
         } catch (e) { }
     }, false);
 }

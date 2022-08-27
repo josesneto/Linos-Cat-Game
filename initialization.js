@@ -4,10 +4,8 @@ var engine = Engine.create();
 var bounds = Bounds.create([{x: -25, y: 0}, {x: 600, y: 600}]);
 // var bounds2 = Bounds.create([{x: -70, y: 70}, {x: 600, y: 600}]);
 
-var bc = createBound(200, 200, 300, 300);
-
-var bound1 = bc['bound'];
-var rect1 = bc['visible_rect'];
+var bounds1 = createBound(500, 0, 550, 1200);
+var bounds2 = createBound(800, 0, 850, 1200);
 
 var render = Render.create({
 element: document.getElementById('canvas'),
