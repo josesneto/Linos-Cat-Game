@@ -1,4 +1,4 @@
-// World.add(engine.world, background);
+World.add(engine.world, background);
 World.add(engine.world, walls);
 // World.add(engine.world, things);
 World.add(engine.world, playerBox);
@@ -50,9 +50,9 @@ window.onload = function () {
             key_code = event.code;
             // console.log(`Key pressed ${key_name} \r\n Key code value: ${key_code}`);
             key_pressed = true;
-            if (key_code.startsWith('Arrow')) {
-                state = 'walking';
-            }
+            // if (key_code.startsWith('Arrow')) {
+            //     state = 'walking';
+            // }
         } catch (e) { }
     }, false);
 }

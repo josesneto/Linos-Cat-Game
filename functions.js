@@ -2,7 +2,6 @@ function keyDownBinding() {
     if (key_pressed) {
         // console.log(Bounds.contains(bounds, {x: playerBox.position.x, y: playerBox.position.y}), playerBox.position.x, playerBox.position.y, JSON.stringify(bounds));
         Bounds.shift(bounds, { x: playerBox.position.x - 500, y: playerBox.position.y - 500 });
-        // Render.lookAt(render, bounds);
         switch (key_code) {
             case 'ArrowLeft':
                 walkToDirection('left');
@@ -24,6 +23,8 @@ function keyDownBinding() {
                 break;
             case 'KeyS':
                 sit();
+                key_pressed = false;
+                // Render.lookAt(render, bounds);
                 break;
         }
     }
@@ -66,7 +67,7 @@ function sit() {
 
 function walkToPosition(x, y) {
     clearInterval(walk_to_position_interval);
-    x = x - 100;
+    x = x - 115;
     var last_x, last_y;
     walk_to_position_interval = setInterval(function () {
         is_walking_to_a_position = true;
