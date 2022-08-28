@@ -60,10 +60,10 @@ var playerBox = Bodies.rectangle(200, 200, 90, 50, {
     },
 });
 
-var things = [
-        Bodies.circle(400, 150, 10),
-        Bodies.circle(400, 300, 15),
-        Bodies.circle(400, 450, 10),
-        Bodies.circle(300, 280, 20),
-        Bodies.circle(400, 500, 10)
-    ]
+// var things = [
+//         Bodies.circle(400, 150, 10),
+//         Bodies.circle(400, 300, 15),
+//         Bodies.circle(400, 450, 10),
+//         Bodies.circle(300, 280, 20),
+//         Bodies.circle(400, 500, 10)
+//     ]

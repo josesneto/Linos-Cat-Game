@@ -1,6 +1,6 @@
 // World.add(engine.world, background);
 World.add(engine.world, walls);
-World.add(engine.world, things);
+// World.add(engine.world, things);
 World.add(engine.world, playerBox);
 
 // World.add(engine.world, foreground);
@@ -11,7 +11,7 @@ Render.run(render);
 // Bounds.shift(bounds, {x: playerBox.position.x, y: playerBox.position.y});
 // Render.lookAt(render, bounds);
 
- var bound_stepped = {};
+var bound_stepped = {};
 
 var seq_counter = 1,
     boomerang_counter = 1,
@@ -20,8 +20,9 @@ var seq_counter = 1,
     direction = 1,
     state = 'standing',
     key_pressed = false,
-    cat_vel = 1
-        image_sources = {};
+    cat_vel = 1,
+    is_walking_to_a_position = false,
+    image_sources = {};
 
 loadImages();
 
@@ -31,6 +32,7 @@ window.onload = function () {
     setInterval(updateFrames, 150);
     setInterval(boundsCheckListener, 100, bounds1, 'bound1');
     setInterval(boundsCheckListener, 100, bounds2, 'bound2');
+    setInterval(function () { console.log(mouseconstraint.mouse.position); }, 100);
 
     document.addEventListener('keyup', (event) => {
         try {

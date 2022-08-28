@@ -30,6 +30,7 @@ function keyDownBinding() {
 }
 
 function walkToDirection(arrowDirection) {
+    state = 'walking';
     boomerang_frame = false;
     switch (arrowDirection) {
         case 'left':
@@ -50,17 +51,46 @@ function walkToDirection(arrowDirection) {
 }
 
 function stopAndStand() {
+    state = 'standing';
     boomerang_frame = true;
     Matter.Body.setVelocity(playerBox, { x: 0, y: 0 });
     animation_index = 0;
     key_pressed = false;
-    state = 'standing';
 }
 
 function sit() {
+    state = 'sitting';
     boomerang_frame = true;
     Matter.Body.setVelocity(playerBox, { x: 0, y: 0 });
-    state = 'sitting';
+}
+
+function walkToPosition(x, y) {
+    if (!is_walking_to_a_position) {
+        x = x-100;
+        var last_x, last_y;
+        var interval = setInterval( function() {
+        is_walking_to_a_position = true;
+        if (playerBox.position.x < x) {
+            walkToDirection('right');
+        }
+        if (playerBox.position.x > x) {
+            walkToDirection('left');
+        }
+        if (playerBox.position.y > y) {
+            walkToDirection('up');
+        }
+        if (playerBox.position.y < y) {
+            walkToDirection('down');
+        }
+        if ((playerBox.position.y == last_y && playerBox.position.x == last_x) || !checkBounds(bounds3, {x: playerBox.position.x, y: playerBox.position.y})) {
+            clearInterval(interval);
+            is_walking_to_a_position = false;
+            stopAndStand();
+        }
+        last_x = playerBox.position.x;
+        last_y = playerBox.position.y;
+    }, 30);
+    }
 }
 
 function createBound(x1, y1, x2, y2) {
@@ -83,8 +113,10 @@ function checkBounds(bounds, vector) {
 function boundsCheckListener(bounds, bounds_name) {
     bound_stepped[bounds_name] = bound_stepped[bounds_name] ? bound_stepped[bounds_name] : false;
     if (!bound_stepped[bounds_name] && checkBounds(bounds, {x: playerBox.position.x, y: playerBox.position.y})) {
-        alert(bounds_name);
-        stopAndStand();
+        // alert(bounds_name);
+        if (!is_walking_to_a_position) {
+            stopAndStand();
+        }
     }
     bound_stepped[bounds_name] = checkBounds(bounds, {x: playerBox.position.x, y: playerBox.position.y});
 }
