@@ -2,6 +2,7 @@ World.add(engine.world, background);
 World.add(engine.world, walls);
 // World.add(engine.world, things);
 World.add(engine.world, playerBox);
+World.add(engine.world, ch_cat_icon);
 
 // World.add(engine.world, foreground);
 
@@ -29,7 +30,8 @@ loadImages();
 window.onload = function () {
 
     setInterval(keyDownBinding, 25);
-    setInterval(updateFrames, 150);
+    setInterval(updateFrames, 150, playerBox, 'cats');
+    setInterval(updateFrames, 750, ch_cat_icon, 'icons/change-cat');
     setInterval(boundsCheckListener, 100, bounds1, 'bound1');
     setInterval(boundsCheckListener, 100, bounds2, 'bound2');
     setInterval(function () { console.log(mouseconstraint.mouse.position); }, 100);

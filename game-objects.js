@@ -15,6 +15,25 @@ var background = Bodies.rectangle(600, 350, 1200, 700, {
         'mask': 0,
       }
 });
+
+var ch_cat_icon = Bodies.rectangle(100, 600, 100, 100, {
+    isStatic: true, render: {
+        fillStyle: "#ff0000",
+        sprite: {
+            texture: "images/icons/change-cat/2.png",
+            xScale: 0.27,
+            yScale: 0.27,
+            yOffset: 0,
+            xOffset: 0
+        }
+    },
+    collisionFilter: {
+        'group': -1,
+        'category': 2,
+        'mask': 0,
+      }
+});
+
 // var foreground = Bodies.rectangle(600, 350, 1200, 700, {
 //     isStatic: true, render: {
 //         fillStyle: "#ff0000",

@@ -128,6 +128,26 @@ function updateFrames() {
     }
 }
 
+function updateFrames(object, type) {
+    var frame_name = boomerang_frame == true ? direction * boomerang_counter : direction * seq_counter;
+    var path_prefix = "images/" + type;
+    if (type == 'cats') {
+        path_prefix = [path_prefix, 'orange', state, frame_name].join('/');
+    } else {
+        path_prefix = [path_prefix, frame_name.toString().replace('-', '')].join('/');
+        console.log(path_prefix);
+        // return;
+    }
+    object.render.sprite.texture = path_prefix + ".png";
+    if (type == 'cats') {
+        seq_counter = seq_counter < 4 ? seq_counter + 1 : 1;
+        boomerang_counter = boomerang_counter + frame_acc;
+        if (boomerang_counter == 1 || boomerang_counter == 4) {
+            frame_acc *= -1;
+        }
+    }
+}
+
 function preloadImage(url) {
     var img = new Image();
     img.src = url;
@@ -147,4 +167,9 @@ function loadImages() {
             }
         }
     }
+    preloadImage("images/floor.png");
+    preloadImage("images/icons/change-cat/1.png");
+    preloadImage("images/icons/change-cat/2.png");
+    preloadImage("images/icons/change-cat/3.png");
+    preloadImage("images/icons/change-cat/4.png");
 }
