@@ -21,7 +21,7 @@ var seq_counter = 1,
     state = 'standing',
     key_pressed = false,
     cat_vel = 1,
-    is_walking_to_a_position = false,
+    walk_to_position_interval,
     image_sources = {};
 
 loadImages();

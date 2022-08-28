@@ -6,12 +6,8 @@ var bounds = Bounds.create([{x: -25, y: 0}, {x: 600, y: 600}]);
 // var bounds2 = Bounds.create([{x: -70, y: 70}, {x: 600, y: 600}]);
 
 Events.on(mouseconstraint, "mousedown", function(){
-    console.log('test');
     state = 'walking';
     walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);
-});
-Events.on(mouseconstraint, "mouseup", function(){
-    console.log('yo');
 });
 
 var bounds1 = createBound(500, 0, 550, 1200);

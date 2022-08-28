@@ -1,7 +1,7 @@
 function keyDownBinding() {
     if (key_pressed) {
         // console.log(Bounds.contains(bounds, {x: playerBox.position.x, y: playerBox.position.y}), playerBox.position.x, playerBox.position.y, JSON.stringify(bounds));
-        Bounds.shift(bounds, {x: playerBox.position.x-500, y: playerBox.position.y-500});
+        Bounds.shift(bounds, { x: playerBox.position.x - 500, y: playerBox.position.y - 500 });
         // Render.lookAt(render, bounds);
         switch (key_code) {
             case 'ArrowLeft':
@@ -20,7 +20,7 @@ function keyDownBinding() {
                 break;
             case 'ArrowDown':
                 walkToDirection('down');
-                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel});
+                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel });
                 break;
             case 'KeyS':
                 sit();
@@ -45,7 +45,7 @@ function walkToDirection(arrowDirection) {
             Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - 10 });
             break;
         case 'down':
-            Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + 10});
+            Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + 10 });
             break;
     }
 }
@@ -65,10 +65,10 @@ function sit() {
 }
 
 function walkToPosition(x, y) {
-    if (!is_walking_to_a_position) {
-        x = x-100;
-        var last_x, last_y;
-        var interval = setInterval( function() {
+    clearInterval(walk_to_position_interval);
+    x = x - 100;
+    var last_x, last_y;
+    walk_to_position_interval = setInterval(function () {
         is_walking_to_a_position = true;
         if (playerBox.position.x < x) {
             walkToDirection('right');
@@ -82,15 +82,14 @@ function walkToPosition(x, y) {
         if (playerBox.position.y < y) {
             walkToDirection('down');
         }
-        if ((playerBox.position.y == last_y && playerBox.position.x == last_x) || !checkBounds(bounds3, {x: playerBox.position.x, y: playerBox.position.y})) {
-            clearInterval(interval);
-            is_walking_to_a_position = false;
+        if ((playerBox.position.y == last_y && playerBox.position.x == last_x) || !checkBounds(bounds3, { x: playerBox.position.x, y: playerBox.position.y })) {
+            clearInterval(walk_to_position_interval);
             stopAndStand();
         }
         last_x = playerBox.position.x;
         last_y = playerBox.position.y;
     }, 30);
-    }
+    // }
 }
 
 function createBound(x1, y1, x2, y2) {
@@ -112,13 +111,10 @@ function checkBounds(bounds, vector) {
 
 function boundsCheckListener(bounds, bounds_name) {
     bound_stepped[bounds_name] = bound_stepped[bounds_name] ? bound_stepped[bounds_name] : false;
-    if (!bound_stepped[bounds_name] && checkBounds(bounds, {x: playerBox.position.x, y: playerBox.position.y})) {
+    if (!bound_stepped[bounds_name] && checkBounds(bounds, { x: playerBox.position.x, y: playerBox.position.y })) {
         // alert(bounds_name);
-        if (!is_walking_to_a_position) {
-            stopAndStand();
-        }
     }
-    bound_stepped[bounds_name] = checkBounds(bounds, {x: playerBox.position.x, y: playerBox.position.y});
+    bound_stepped[bounds_name] = checkBounds(bounds, { x: playerBox.position.x, y: playerBox.position.y });
 }
 
 function updateFrames() {
