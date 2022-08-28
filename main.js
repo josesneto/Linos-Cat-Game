@@ -1,8 +1,8 @@
 World.add(engine.world, background);
 World.add(engine.world, walls);
 // World.add(engine.world, things);
-World.add(engine.world, playerBox);
 World.add(engine.world, ch_cat_icon);
+World.add(engine.world, playerBox);
 
 // World.add(engine.world, foreground);
 
@@ -14,7 +14,9 @@ Render.run(render);
 
 var bound_stepped = {};
 
-var seq_counter = 1,
+var cat_sprites = ['orange', 'gray'],
+    current_cat_sprite_index = 0,
+    seq_counter = 1,
     boomerang_counter = 1,
     boomerang_frame = true,
     frame_acc = 1,
@@ -32,7 +34,7 @@ window.onload = function () {
     setInterval(keyDownBinding, 25);
     setInterval(updateFrames, 150, playerBox, 'cats');
     setInterval(updateFrames, 750, ch_cat_icon, 'icons/change-cat');
-    setInterval(boundsCheckListener, 100, bounds1, 'bound1');
+    setInterval(function() {if (checkBounds(bounds1, playerBox.position)) {changeCatSprite()}}, 750);
     setInterval(boundsCheckListener, 100, bounds2, 'bound2');
     setInterval(function () { console.log(mouseconstraint.mouse.position); }, 100);
 

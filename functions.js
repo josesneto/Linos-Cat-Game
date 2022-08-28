@@ -4,22 +4,30 @@ function keyDownBinding() {
         Bounds.shift(bounds, { x: playerBox.position.x - 500, y: playerBox.position.y - 500 });
         switch (key_code) {
             case 'ArrowLeft':
-                walkToDirection('left');
-                direction = -1;
-                Body.setPosition(playerBox, { x: playerBox.position.x - cat_vel, y: playerBox.position.y });
+                if (!is_walking_to_a_position) {
+                    walkToDirection('left');
+                    direction = -1;
+                    Body.setPosition(playerBox, { x: playerBox.position.x - cat_vel, y: playerBox.position.y });
+                }
                 break;
             case 'ArrowRight':
-                walkToDirection('right');
-                direction = 1;
-                Body.setPosition(playerBox, { x: playerBox.position.x + cat_vel, y: playerBox.position.y });
+                if (!is_walking_to_a_position) {
+                    walkToDirection('right');
+                    direction = 1;
+                    Body.setPosition(playerBox, { x: playerBox.position.x + cat_vel, y: playerBox.position.y });
+                }
                 break;
             case 'ArrowUp':
-                walkToDirection('up');
-                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - cat_vel });
+                if (!is_walking_to_a_position) {
+                    walkToDirection('up');
+                    Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - cat_vel });
+                }
                 break;
             case 'ArrowDown':
-                walkToDirection('down');
-                Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel });
+                if (!is_walking_to_a_position) {
+                    walkToDirection('down');
+                    Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel });
+                }
                 break;
             case 'KeyS':
                 sit();
@@ -85,6 +93,7 @@ function walkToPosition(x, y) {
         }
         if ((playerBox.position.y == last_y && playerBox.position.x == last_x) || !checkBounds(bounds3, { x: playerBox.position.x, y: playerBox.position.y })) {
             clearInterval(walk_to_position_interval);
+            is_walking_to_a_position = false;
             stopAndStand();
         }
         last_x = playerBox.position.x;
@@ -110,10 +119,12 @@ function checkBounds(bounds, vector) {
     return Bounds.contains(bounds, vector);
 }
 
-function boundsCheckListener(bounds, bounds_name) {
+function boundsCheckListener(bounds, bounds_name, trigger_script) {
     bound_stepped[bounds_name] = bound_stepped[bounds_name] ? bound_stepped[bounds_name] : false;
     if (!bound_stepped[bounds_name] && checkBounds(bounds, { x: playerBox.position.x, y: playerBox.position.y })) {
-        // alert(bounds_name);
+        if (trigger_script) {
+            eval(trigger_script);
+        }
     }
     bound_stepped[bounds_name] = checkBounds(bounds, { x: playerBox.position.x, y: playerBox.position.y });
 }
@@ -128,11 +139,15 @@ function updateFrames() {
     }
 }
 
+function changeCatSprite(index) {
+    current_cat_sprite_index = index ? index % cat_sprites.length : (current_cat_sprite_index + 1) % cat_sprites.length;
+}
+
 function updateFrames(object, type) {
     var frame_name = boomerang_frame == true ? direction * boomerang_counter : direction * seq_counter;
     var path_prefix = "images/" + type;
     if (type == 'cats') {
-        path_prefix = [path_prefix, 'orange', state, frame_name].join('/');
+        path_prefix = [path_prefix, cat_sprites[current_cat_sprite_index], state, frame_name].join('/');
     } else {
         path_prefix = [path_prefix, frame_name.toString().replace('-', '')].join('/');
         console.log(path_prefix);
@@ -155,7 +170,7 @@ function preloadImage(url) {
 }
 
 function loadImages() {
-    var cats = ['orange'];
+    var cats = cat_sprites;
     var states = ['standing', 'walking', 'sitting'];
     for (var i = 0; i < cats.length; i++) {
         for (var j = 0; j < states.length; j++) {

@@ -53,10 +53,10 @@ var ch_cat_icon = Bodies.rectangle(100, 600, 100, 100, {
 // });
 
 var walls = [
-    Bodies.rectangle(600, 0, 1200, 10, { isStatic: true, render: { fillStyle: "#ff0000" } }),
-    Bodies.rectangle(600, 700, 1200, 10, { isStatic: true, render: { fillStyle: "#ff0000" } }),
-    Bodies.rectangle(0, 350, 10, 700, { isStatic: true, render: { fillStyle: "#00ff00" } }),
-    Bodies.rectangle(1200, 350, 10, 700, { isStatic: true, render: { fillStyle: "#00ff00" } }),
+    Bodies.rectangle(600, 0, 1200, 10, { isStatic: true, render: { fillStyle: "#000000" } }),
+    Bodies.rectangle(600, 700, 1200, 10, { isStatic: true, render: { fillStyle: "#000000" } }),
+    Bodies.rectangle(0, 350, 10, 700, { isStatic: true, render: { fillStyle: "#000000" } }),
+    Bodies.rectangle(1200, 350, 10, 700, { isStatic: true, render: { fillStyle: "#000000" } }),
 ]
 
 var playerBox = Bodies.rectangle(200, 200, 90, 50, {

@@ -10,7 +10,7 @@ Events.on(mouseconstraint, "mousedown", function(){
     walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);
 });
 
-var bounds1 = createBound(500, 0, 550, 1200);
+var bounds1 = createBound(50, 500, 150, 700);
 var bounds2 = createBound(800, 0, 850, 1200);
 var bounds3 = createBound(40, 40, 1160, 660);
 
