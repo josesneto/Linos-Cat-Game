@@ -14,7 +14,7 @@ Render.run(render);
 
 var bound_stepped = {};
 
-var cat_sprites = ['orange', 'gray'],
+var cat_sprites = ['orange', 'gray', 'brown', 'black', 'white', 'yellow'],
     current_cat_sprite_index = 0,
     seq_counter = 1,
     boomerang_counter = 1,
@@ -33,8 +33,8 @@ window.onload = function () {
 
     setInterval(keyDownBinding, 25);
     setInterval(updateFrames, 150, playerBox, 'cats');
-    setInterval(updateFrames, 750, ch_cat_icon, 'icons/change-cat');
-    setInterval(function() {if (checkBounds(bounds1, playerBox.position)) {changeCatSprite()}}, 750);
+    setInterval(updateFrames, 1050, ch_cat_icon, 'icons/change-cat');
+    setInterval(function() {if (checkBounds(bounds1, playerBox.position)) {changeCatSprite()}}, 1050);
     setInterval(boundsCheckListener, 100, bounds2, 'bound2');
     setInterval(function () { console.log(mouseconstraint.mouse.position); }, 100);
 
