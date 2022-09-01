@@ -5,8 +5,8 @@ var mouseconstraint = Matter.MouseConstraint.create(engine);
 var bounds = Bounds.create([{x: -25, y: 0}, {x: 600, y: 600}]);
 // var bounds2 = Bounds.create([{x: -70, y: 70}, {x: 600, y: 600}]);
 
+
 Events.on(mouseconstraint, "mousedown", function(){
-    state = 'walking';
     walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);
 });
 
@@ -18,8 +18,8 @@ var render = Render.create({
 element: document.getElementById('canvas'),
 engine: engine,
 options: {
-    width: 1200,
-    height: 700,
+    width: window.innerWidth,
+    height: 200,
     wireframes: false
 }
 });

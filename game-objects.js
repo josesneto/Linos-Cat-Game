@@ -1,10 +1,10 @@
-var background = Bodies.rectangle(600, 350, 1200, 700, {
+var background = Bodies.rectangle(window.innerWidth/2, 50, window.innerWidth, window.innerHeight*3, {
     isStatic: true, render: {
-        fillStyle: "#ff0000",
+        fillStyle: "#000000",
         sprite: {
             texture: "images/floor.png",
-            xScale: 0.27,
-            yScale: 0.27,
+            xScale: 1,
+            yScale: 1,
             yOffset: 0,
             xOffset: 0
         }
@@ -16,7 +16,7 @@ var background = Bodies.rectangle(600, 350, 1200, 700, {
       }
 });
 
-var ch_cat_icon = Bodies.rectangle(100, 600, 100, 100, {
+var ch_cat_icon = Bodies.rectangle(100, 100, 200, 200, {
     isStatic: true, render: {
         fillStyle: "#ff0000",
         sprite: {
@@ -59,13 +59,13 @@ var walls = [
     Bodies.rectangle(1200, 350, 10, 700, { isStatic: true, render: { fillStyle: "#000000" } }),
 ]
 
-var playerBox = Bodies.rectangle(200, 200, 90, 50, {
+var playerBox = Bodies.rectangle(300, 300, 90, 50, {
     angle: 0, render: {
         fillStyle: "#ff0000",
         sprite: {
             texture: "images/cats/orange/standing/1.png",
-            xScale: 0.25,
-            yScale: 0.20,
+            xScale: 0.30,
+            yScale: 0.25,
             yOffset: 0.25,
             xOffset: 0
         }

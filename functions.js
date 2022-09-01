@@ -1,59 +1,66 @@
 function keyDownBinding() {
-    if (key_pressed) {
+    // if (key_pressed) {
         // console.log(Bounds.contains(bounds, {x: playerBox.position.x, y: playerBox.position.y}), playerBox.position.x, playerBox.position.y, JSON.stringify(bounds));
-        Bounds.shift(bounds, { x: playerBox.position.x - 500, y: playerBox.position.y - 500 });
-        switch (key_code) {
-            case 'ArrowLeft':
-                if (!is_walking_to_a_position) {
-                    walkToDirection('left');
-                    direction = -1;
-                    Body.setPosition(playerBox, { x: playerBox.position.x - cat_vel, y: playerBox.position.y });
-                }
-                break;
-            case 'ArrowRight':
-                if (!is_walking_to_a_position) {
-                    walkToDirection('right');
-                    direction = 1;
-                    Body.setPosition(playerBox, { x: playerBox.position.x + cat_vel, y: playerBox.position.y });
-                }
-                break;
-            case 'ArrowUp':
-                if (!is_walking_to_a_position) {
-                    walkToDirection('up');
-                    Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - cat_vel });
-                }
-                break;
-            case 'ArrowDown':
-                if (!is_walking_to_a_position) {
-                    walkToDirection('down');
-                    Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel });
-                }
-                break;
-            case 'KeyS':
-                sit();
-                key_pressed = false;
-                // Render.lookAt(render, bounds);
-                break;
+        // Bounds.shift(bounds, { x: playerBox.position.x - 500, y: playerBox.position.y - 500 });
+        for (var key in key_pressed_dict) {
+            if (key_pressed_dict[key] == true && key.startsWith('Arrow')) {           
+                console.log(key, key_pressed_dict[key]);
+                walkToDirection(key);
+            }
         }
-    }
+
+        // switch (key_code) {
+        //     case 'ArrowLeft':
+        //         if (!is_walking_to_a_position) {
+        //             walkToDirection('left');
+        //             direction = -1;
+        //             Body.setPosition(playerBox, { x: playerBox.position.x - cat_vel, y: playerBox.position.y });
+        //         }
+        //         break;
+        //     case 'ArrowRight':
+        //         if (!is_walking_to_a_position) {
+        //             walkToDirection('right');
+        //             direction = 1;
+        //             Body.setPosition(playerBox, { x: playerBox.position.x + cat_vel, y: playerBox.position.y });
+        //         }
+        //         break;
+        //     case 'ArrowUp':
+        //         if (!is_walking_to_a_position) {
+        //             walkToDirection('up');
+        //             Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - cat_vel });
+        //         }
+        //         break;
+        //     case 'ArrowDown':
+        //         if (!is_walking_to_a_position) {
+        //             walkToDirection('down');
+        //             Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + cat_vel });
+        //         }
+        //         break;
+        //     case 'KeyS':
+        //         sit();
+        //         key_pressed = false;
+        //         // Render.lookAt(render, bounds);
+        //         break;
+        // }
+    // }
 }
 
 function walkToDirection(arrowDirection) {
     state = 'walking';
     boomerang_frame = false;
     switch (arrowDirection) {
-        case 'left':
+        case 'ArrowLeft':
             direction = -1;
             Body.setPosition(playerBox, { x: playerBox.position.x - 10, y: playerBox.position.y });
             break;
-        case 'right':
+        case 'ArrowRight':
             direction = 1;
             Body.setPosition(playerBox, { x: playerBox.position.x + 10, y: playerBox.position.y });
             break;
-        case 'up':
+        case 'ArrowUp':
             Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y - 10 });
             break;
-        case 'down':
+        case 'ArrowDown':
             Body.setPosition(playerBox, { x: playerBox.position.x, y: playerBox.position.y + 10 });
             break;
     }
@@ -80,19 +87,20 @@ function walkToPosition(x, y) {
     walk_to_position_interval = setInterval(function () {
         is_walking_to_a_position = true;
         if (playerBox.position.x < x) {
-            walkToDirection('right');
+            walkToDirection('ArrowRight');
         }
         if (playerBox.position.x > x) {
-            walkToDirection('left');
+            walkToDirection('ArrowLeft');
         }
         if (playerBox.position.y > y) {
-            walkToDirection('up');
+            walkToDirection('ArrowUp');
         }
         if (playerBox.position.y < y) {
-            walkToDirection('down');
+            walkToDirection('ArrowDown');
         }
-        if ((playerBox.position.y == last_y && playerBox.position.x == last_x) || !checkBounds(bounds3, { x: playerBox.position.x, y: playerBox.position.y })) {
-            clearInterval(walk_to_position_interval);
+        // if ((playerBox.position.y == last_y && playerBox.position.x == last_x) || !checkBounds(bounds3, { x: playerBox.position.x, y: playerBox.position.y })) {
+        if ((playerBox.position.y == last_y && playerBox.position.x == last_x)) {
+        clearInterval(walk_to_position_interval);
             is_walking_to_a_position = false;
             stopAndStand();
         }

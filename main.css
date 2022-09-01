@@ -10,8 +10,6 @@ body {
 }
 
 #canvas {
-    border: solid red 1px;
-    width: 1400;
-    height: 900;
+    /* border: solid red 1px; */
     margin: auto;
 }
