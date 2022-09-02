@@ -10,7 +10,7 @@ Events.on(mouseconstraint, "mousedown", function(){
     walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);
 });
 
-var bounds1 = createBound(50, 500, 150, 700);
+var bounds1 = createBound(0, 0, 150, 150);
 var bounds2 = createBound(800, 0, 850, 1200);
 var bounds3 = createBound(40, 40, 1160, 660);
 
@@ -18,8 +18,8 @@ var render = Render.create({
 element: document.getElementById('canvas'),
 engine: engine,
 options: {
-    width: window.innerWidth,
-    height: 200,
+    width: 1200,
+    height: 700,
     wireframes: false
 }
 });

@@ -1,5 +1,5 @@
 
-// World.add(engine.world, walls);
+World.add(engine.world, walls);
 World.add(engine.world, background);
 // World.add(engine.world, things);
 World.add(engine.world, ch_cat_icon);
@@ -43,7 +43,7 @@ window.onload = function () {
     setInterval(updateFrames, 1050, ch_cat_icon, 'icons/change-cat');
     setInterval(function() {if (checkBounds(bounds1, playerBox.position)) {changeCatSprite()}}, 1050);
     setInterval(boundsCheckListener, 100, bounds2, 'bound2');
-    setInterval(function () {walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);}, 3000);
+    // setInterval(function () {walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);}, 3000);
 
     document.addEventListener('keyup', (event) => {
         try {

@@ -1,10 +1,10 @@
-var background = Bodies.rectangle(window.innerWidth/2, 50, window.innerWidth, window.innerHeight*3, {
+var background = Bodies.rectangle(600, 350, 1200, 700, {
     isStatic: true, render: {
         fillStyle: "#000000",
         sprite: {
             texture: "images/floor.png",
-            xScale: 1,
-            yScale: 1,
+            xScale: 2,
+            yScale: 2,
             yOffset: 0,
             xOffset: 0
         }
