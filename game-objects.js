@@ -13,7 +13,7 @@ var background = Bodies.rectangle(600, 350, 1200, 700, {
         'group': -1,
         'category': 2,
         'mask': 0,
-      }
+    }
 });
 
 var ch_cat_icon = Bodies.rectangle(100, 100, 200, 200, {
@@ -31,7 +31,7 @@ var ch_cat_icon = Bodies.rectangle(100, 100, 200, 200, {
         'group': -1,
         'category': 2,
         'mask': 0,
-      }
+    }
 });
 
 // var foreground = Bodies.rectangle(600, 350, 1200, 700, {
@@ -63,7 +63,7 @@ var playerBox = Bodies.rectangle(300, 300, 90, 50, {
     angle: 0, render: {
         fillStyle: "#ff0000",
         sprite: {
-            texture: "images/cats/yellow/standing/1.png",
+            texture: "images/player-outfit-sprites/yellow/standing/1.png",
             xScale: 0.30,
             yScale: 0.25,
             yOffset: 0.25,
@@ -72,6 +72,6 @@ var playerBox = Bodies.rectangle(300, 300, 90, 50, {
     },
 });
 
-
+game_context.player1 = playerBox;
 
 var bounds1 = createBounds(0, 0, 150, 150);

@@ -14,38 +14,40 @@ Render.run(render);
 // Render.lookAt(render, bounds);
 
 
-var bound_stepped = {};
 
-var cat_sprites = ['orange', 'gray', 'brown', 'black', 'white', 'yellow'],
-    current_cat_sprite_index = 0,
-    seq_counter = 1,
-    boomerang_counter = 1,
-    boomerang_frame = true,
-    frame_acc = 1,
-    direction = 1,
-    state = 'standing',
-    key_pressed_dict = {
-        ArrowUp: false,
-        ArrowDown: false,
-        ArrowRight: false,
-        ArrowLeft: false
-    },
-    cat_vel = 2,
-    walk_to_position_interval,
-    image_sources = {};
-
-loadImages();
+loadImages(ctx_vars.game_image_paths);
 
 window.onload = function () {
 
     setInterval(keyDownBinding, 25);
-    setInterval(updateFrames, 150, playerBox, 'cats');
+    setInterval(updateFrames, 150, game_context.player1, 'player-outfit-sprites');
     setInterval(updateFrames, 1050, ch_cat_icon, 'icons/change-cat');
-    setInterval(function () { if (checkBounds(bounds1, playerBox.position)) { changeCatSprite() } }, 1050);
-    setInterval(boundsCheckListener, 100, bounds2, 'bound2');
+    setInterval(function () { if (checkBounds(bounds1, game_context.player1.position)) { changePlayerOutfit() } }, 1050);
+    // setInterval(boundsCheckListener, 100, bounds2, 'bound2');
     // setInterval(function () {walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);}, 3000);
 
-    
+// INITIALIZATION OF EVENT LISTENERS __________________________________
+
+Events.on(mouseconstraint, "mousedown", function () {
+    walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);
+});
+
+document.addEventListener('keyup', (event) => {
+    try {
+        var key_code = event.code;
+        ctx_vars.key_pressed_dict[key_code] = false;
+        if (ctx_vars.current_player_state != 'sitting') {
+            stopAndStand();
+        }
+    } catch (e) { }
+}, false);
+
+document.addEventListener('keydown', (event) => {
+    try {
+        key_code = event.code;
+        ctx_vars.key_pressed_dict[key_code] = true;
+    } catch (e) { }
+}, false);
 }
 
 
