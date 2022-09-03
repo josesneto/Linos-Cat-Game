@@ -63,7 +63,7 @@ var playerBox = Bodies.rectangle(300, 300, 90, 50, {
     angle: 0, render: {
         fillStyle: "#ff0000",
         sprite: {
-            texture: "images/cats/orange/standing/1.png",
+            texture: "images/cats/yellow/standing/1.png",
             xScale: 0.30,
             yScale: 0.25,
             yOffset: 0.25,
