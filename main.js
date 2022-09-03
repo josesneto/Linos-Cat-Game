@@ -41,32 +41,11 @@ window.onload = function () {
     setInterval(keyDownBinding, 25);
     setInterval(updateFrames, 150, playerBox, 'cats');
     setInterval(updateFrames, 1050, ch_cat_icon, 'icons/change-cat');
-    setInterval(function() {if (checkBounds(bounds1, playerBox.position)) {changeCatSprite()}}, 1050);
+    setInterval(function () { if (checkBounds(bounds1, playerBox.position)) { changeCatSprite() } }, 1050);
     setInterval(boundsCheckListener, 100, bounds2, 'bound2');
     // setInterval(function () {walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);}, 3000);
 
-    document.addEventListener('keyup', (event) => {
-        try {
-            var key_name = event.key;
-            var key_code = event.code;
-            key_pressed_dict[key_code] = false;
-            if (state != 'sitting') {
-                stopAndStand();
-            }
-        } catch (e) { }
-    }, false);
-
-    document.addEventListener('keydown', (event) => {
-        try {
-            key_name = event.key;
-            key_code = event.code;
-            key_pressed_dict[key_code] = true;
-            // console.log(`Key pressed ${key_name} \r\n Key code value: ${key_code}`);
-            // if (key_code.startsWith('Arrow')) {
-            //     state = 'walking';
-            // }
-        } catch (e) { }
-    }, false);
+    
 }
 
 

@@ -1,33 +1,42 @@
 
 
-var engine = Engine.create();
+var engine = Engine.create({ gravity: { scale: 0 } });
 var mouseconstraint = Matter.MouseConstraint.create(engine);
-var bounds = Bounds.create([{x: -25, y: 0}, {x: 600, y: 600}]);
-// var bounds2 = Bounds.create([{x: -70, y: 70}, {x: 600, y: 600}]);
+var render = Render.create({
+    element: document.getElementById('canvas'),
+    engine: engine,
+    options: {
+        width: 1200,
+        height: 700,
+        wireframes: false
+    }
+});
 
+// INITIALIZATION OF EVENT LISTENERS __________________________________
 
-Events.on(mouseconstraint, "mousedown", function(){
+Events.on(mouseconstraint, "mousedown", function () {
     walkToPosition(mouseconstraint.mouse.position.x, mouseconstraint.mouse.position.y);
 });
 
-var bounds1 = createBound(0, 0, 150, 150);
-var bounds2 = createBound(800, 0, 850, 1200);
-var bounds3 = createBound(40, 40, 1160, 660);
+document.addEventListener('keyup', (event) => {
+    try {
+        var key_code = event.code;
+        key_pressed_dict[key_code] = false;
+        if (state != 'sitting') {
+            stopAndStand();
+        }
+    } catch (e) { }
+}, false);
 
-var render = Render.create({
-element: document.getElementById('canvas'),
-engine: engine,
-options: {
-    width: 1200,
-    height: 700,
-    wireframes: false
-}
-});
+document.addEventListener('keydown', (event) => {
+    try {
+        key_code = event.code;
+        key_pressed_dict[key_code] = true;
+    } catch (e) { }
+}, false);
 
-
-
-engine.gravity.scale = 0;
-
+// DEBUGGING PURPOSES _________________________________________________
+ 
 this.test_engine = engine;
 this.test_mouse = mouse;
 this.test_render = render;

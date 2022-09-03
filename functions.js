@@ -110,16 +110,8 @@ function walkToPosition(x, y) {
     // }
 }
 
-function createBound(x1, y1, x2, y2) {
+function createBounds(x1, y1, x2, y2) {
     var bounds = Bounds.create([{ x: x1, y: y1 }, { x: x2, y: y2 }]);
-    // var visible_rect = Bodies.rectangle(x1,y1, x2-x1, y2-y1,  {
-    //     isStatic: true, collisionFilter: {
-    //         'group': -1,
-    //         'category': 2,
-    //         'mask': 0,
-    //     }
-    // });
-    // return { bound: bound, visible_rect: visible_rect };
     return bounds;
 }
 

@@ -71,3 +71,7 @@ var playerBox = Bodies.rectangle(300, 300, 90, 50, {
         }
     },
 });
+
+
+
+var bounds1 = createBounds(0, 0, 150, 150);
